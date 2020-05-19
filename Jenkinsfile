@@ -1,16 +1,17 @@
 pipeline {
-  // agent { node { label 'local' } }
-  agent { docker { image 'python:3.7.2' } }
+  agent { node { label 'local' } }
+  // agent { docker { image 'python:3.7.2' } }
 
   stages {
-    // stage('setup') {
-    //   steps {
-    //     sh 'python --version'
-    //     // sh 'pyenv local 3.8.0'
-    //     sh 'virtualenv .env'
-    //     sh 'source .env/bin/activate'
-    //     }
-    //   }
+    stage('setup') {
+      steps {
+        sh 'python --version'
+        // sh 'pyenv local 3.8.0'
+        sh 'pip install virtualenv'
+        sh 'virtualenv .env'
+        sh 'source .env/bin/activate'
+        }
+      }
       stage('build') {
         steps {
           sh 'pip install -r requirements.txt'
