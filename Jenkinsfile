@@ -1,6 +1,5 @@
 pipeline {
-  // agent { docker { image 'python:3.7.2' } }
-  agent {local}
+  agent { node { label 'labelName' } }
   stages {
     stage('setup') {
       steps {
