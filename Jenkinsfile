@@ -5,11 +5,12 @@ pipeline {
   stages {
     stage('setup') {
       steps {
-        sh 'python --version'
-        // sh 'pyenv local 3.8.0'
-        sh 'pip install virtualenv'
-        sh 'virtualenv .env'
-        sh 'source .env/bin/activate'
+          sh 'python --version'
+          sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
+          // sh 'pyenv local 3.8.0'
+          sh 'pip install virtualenv'
+          sh 'virtualenv .env'
+          sh 'source .env/bin/activate'
         }
       }
       stage('build') {
