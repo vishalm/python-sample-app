@@ -1,0 +1,26 @@
+pipeline {
+   agent any
+
+   stages {
+      stage('checkout') {
+         steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'edf5985a-cb19-4ec6-a544-c13b5bf7d112', url: 'https://github.com/vishalm/python-sample-app.git']]])
+         }
+      }
+      stage('test') {
+        steps {
+          sh 'python test.py'
+        }
+      }
+      stage('test-report') {
+        steps {
+          junit 'test-reports/*.xml'
+        }
+      }
+    }
+  post {
+    always {
+      junit allowEmptyResults: true, testResults: 'test-reports/*.xml'
+    }  
+  }
+}
