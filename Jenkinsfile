@@ -7,6 +7,7 @@ pipeline {
         sh 'pyenv local 3.8.0'
         sh 'virtualenv .env'
         sh 'source .env/bin/activate'
+        }
       }
       stage('build') {
         steps {
@@ -19,7 +20,6 @@ pipeline {
         }
       }
     }
-  }
   post {
     always {
       junit 'test-reports/*.xml'
