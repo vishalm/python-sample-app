@@ -9,20 +9,21 @@ pipeline {
         sh 'virtualenv .env'
         sh 'source .env/bin/activate'
       }
-    stage('build') {
-      steps {
-        sh 'pip install -r requirements.txt'
-      }
-    }
-    stage('test') {
-      steps {
-        sh 'python test.py'
-      }
-      post {
-        always {
-          junit 'test-reports/*.xml'
+      stage('build') {
+        steps {
+          sh 'pip install -r requirements.txt'
         }
-      }    
+      }
+      stage('test') {
+        steps {
+          sh 'python test.py'
+        }
+      }
     }
+  }
+  post {
+    always {
+      junit 'test-reports/*.xml'
+    }  
   }
 }
