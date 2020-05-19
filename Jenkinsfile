@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('setup') {
       steps {
-        sh 'pyenv version'
-        sh 'pyenv local 3.8.0'
+        sh 'python --version'
+        // sh 'pyenv local 3.8.0'
         sh 'virtualenv .env'
         sh 'source .env/bin/activate'
         }
